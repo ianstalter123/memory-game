@@ -69,7 +69,7 @@ var grid = document.querySelectorAll("div");
 	{
 		grid[i].addEventListener("mousedown", function(){
 
-		if(clicked === 1 && this.id !== 'done')
+		if(clicked === 1 && this.id !== 'done' && this.id !== 'pair')
 		{
 
 			this.style.background = "";
@@ -128,14 +128,14 @@ var grid = document.querySelectorAll("div");
 		}}
 
 
-		else if(clicked < 2 && pair < 2 && this.id !== 'done' )	
+		else if(clicked < 1 && pair < 1 && this.id !== 'done' )	
 		{
 		
 		this.style.background = "";
 		this.style.backgroundSize = 'contain';
 
 		this.style.backgroundRepeat = 'no-repeat';
-		
+
 		this.style.backgroundImage =  'url(images/' + this.className + ')';
 		this.style.backgroundPosition = 'center';
 		clicked+=1;
