@@ -133,7 +133,9 @@ var grid = document.querySelectorAll("div");
 		
 		this.style.background = "";
 		this.style.backgroundSize = 'contain';
+
 		this.style.backgroundRepeat = 'no-repeat';
+		
 		this.style.backgroundImage =  'url(images/' + this.className + ')';
 		this.style.backgroundPosition = 'center';
 		clicked+=1;
