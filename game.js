@@ -1,5 +1,6 @@
-var cards = ["q","r",
-"c","d","e","f","g"];
+
+var cards = ["1.jpeg","2.jpeg",
+"3.jpeg","4.jpeg","5.png","6.jpeg","7.jpeg","8.jpeg","9.jpeg","10.jpeg"];
 
 var board = cards.concat(cards);
 
@@ -44,10 +45,14 @@ var grid = document.querySelectorAll("div");
 		if(clicked === 1 && this.id !== 'done')
 		{
 
-			this.innerHTML =  this.className;
+
+			this.style.background =  'url(images/' + this.className + ')';
+			this.style.backgroundSize = 'contain';
+
 			if(pair < 2)
 			{
-			this.style.background = "blue";
+			//this.style.background = "blue";
+
 			this.id = "pair";
 			current = this.className;
 			clicked = 0;
@@ -68,6 +73,9 @@ var grid = document.querySelectorAll("div");
 			}, 2000);
 		}}
 
+		if(prev !== current)
+		{
+
 		setTimeout(function() 
 		{ var pairs = document.querySelectorAll("#pair");
 			pairs[0].style.background = "green";
@@ -79,14 +87,20 @@ var grid = document.querySelectorAll("div");
 			pair = 0;
 		},
 		 2000);
-		}
+
+		}}
+
 
 		else if(clicked < 2 && pair < 2 && this.id !== 'done' )	
 		{
 		//console.log(this.className);
-		this.style.background = "blue";
+
+		//this.style.background = "blue";
+		this.style.backgroundSize = 'contain';
+		this.style.backgroundImage =  'url(images/' + this.className + ')';
 		clicked+=1;
-        this.innerHTML =  this.className;
+        //this.innerHTML =  this.className;
+
 		this.id = "pair";
 		prev = this.className;
 		//console.log(prev);
