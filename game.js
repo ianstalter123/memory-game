@@ -3,7 +3,11 @@ var cards = ["1.jpeg","2.jpeg",
 "3.jpeg","4.jpeg","5.png","6.jpeg","7.jpeg","8.jpeg","9.jpeg","10.jpeg"];
 
 var board = cards.concat(cards);
+var score = 0;
 
+function reset()
+{
+	var score = 0;
 for(var i = 0; i < board.length * 2; i++)
 {
 var temp = 0;
@@ -13,7 +17,8 @@ var rand1 = Math.floor(Math.random() * board.length);
  board[rand] = board[rand1];
  board[rand1] = temp;
 }
-console.log(board);
+//console.log(board);
+};
 
 var clicked = 0;
 var prev = 0;
@@ -34,6 +39,28 @@ for (var i =0; i<set.length; i++)
 		square.style.float = "left";
 		document.body.appendChild(square);	 
 }
+var scorebox = document.createElement("box");
+scorebox.style.width = "10%";
+		scorebox.style.height = "60px";
+		scorebox.style.border = "2px dotted black";
+		scorebox.style.float = "left";
+		scorebox.className = "scorebox";
+document.body.appendChild(scorebox);
+
+var reset = document.createElement("button");
+reset.style.width = "10%";
+		reset.style.height = "30px";
+		reset.style.border = "2px dotted black";
+		reset.style.float = "left";
+		reset.className = "reset";
+		reset.innerHTML = "reset";
+document.body.appendChild(reset);
+reset.addEventListener("mousedown", function(){
+
+		
+			location.reload();
+		
+	})
 }
 
 var makeClickable = function() {
@@ -48,6 +75,7 @@ var grid = document.querySelectorAll("div");
 
 			this.style.background =  'url(images/' + this.className + ')';
 			this.style.backgroundSize = 'contain';
+			this.style.backgroundPosition = 'center';
 
 			if(pair < 2)
 			{
@@ -64,13 +92,21 @@ var grid = document.querySelectorAll("div");
 		{
 				console.log('match');
 				var pairs = document.querySelectorAll("#pair");
-			pairs[0].style.background = "black";
-			pairs[1].style.background = "black";
+			// pairs[0].style.background = "black";
+			// pairs[1].style.background = "black";
 			pairs[0].id = "done";
 			pairs[1].id = "done";
 			pair = 0;
-				
-			}, 2000);
+			score += 1;
+
+			document.querySelector(".scorebox").innerHTML = "SCORE: " + score;
+			if(score === 10)
+			{
+			document.querySelector(".scorebox").innerHTML = "Congrats you won!";
+
+			}
+			console.log(score);
+			}, 500);
 		}}
 
 		if(prev !== current)
@@ -86,30 +122,27 @@ var grid = document.querySelectorAll("div");
 			pairs[1].innerHTML = "";
 			pair = 0;
 		},
-		 2000);
+		 500);
 
 		}}
 
 
 		else if(clicked < 2 && pair < 2 && this.id !== 'done' )	
 		{
-		//console.log(this.className);
-
-		//this.style.background = "blue";
+		
 		this.style.backgroundSize = 'contain';
 		this.style.backgroundImage =  'url(images/' + this.className + ')';
+		this.style.backgroundPosition = 'center';
 		clicked+=1;
-        //this.innerHTML =  this.className;
 
 		this.id = "pair";
 		prev = this.className;
-		//console.log(prev);
-		//console.log(clicked + " in elseif");
+
 	    }
 		});
 
 	}
 }
-
+reset();
 makeGrid(board);
 makeClickable();
