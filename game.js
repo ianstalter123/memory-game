@@ -72,10 +72,11 @@ var grid = document.querySelectorAll("div");
 		if(clicked === 1 && this.id !== 'done')
 		{
 
-
-			this.style.background =  'url(images/' + this.className + ')';
+			this.style.background = "";
+			this.style.backgroundImage =  'url(images/' + this.className + ')';
 			this.style.backgroundSize = 'contain';
 			this.style.backgroundPosition = 'center';
+			this.style.backgroundRepeat = 'no-repeat';
 
 			if(pair < 2)
 			{
@@ -130,7 +131,9 @@ var grid = document.querySelectorAll("div");
 		else if(clicked < 2 && pair < 2 && this.id !== 'done' )	
 		{
 		
+		this.style.background = "";
 		this.style.backgroundSize = 'contain';
+		this.style.backgroundRepeat = 'no-repeat';
 		this.style.backgroundImage =  'url(images/' + this.className + ')';
 		this.style.backgroundPosition = 'center';
 		clicked+=1;
