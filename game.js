@@ -1,13 +1,37 @@
 
 var cards = ["1.jpeg","2.jpeg",
-"3.jpeg","4.jpeg","5.png","6.jpeg","7.jpeg","8.jpeg","9.jpeg","10.jpeg"];
-
-var board = cards.concat(cards);
+"3.jpeg","4.jpeg","5.png","6.jpeg","7.jpeg","8.jpeg","9.jpeg"];
+var timer = 0;
+var board = [];
 var score = 0;
+var time = 50;
 
-function reset()
+ function startTimer(timeLeft) {
+      if (timeLeft > 0) {
+
+        console.log(timeLeft);
+        document.querySelector(".timebox").innerHTML = "<b>TIME:</b> " + timeLeft;
+
+      timer =  setTimeout (function() {startTimer(timeLeft-1); }, 1000);
+       }
+       else
+       {
+       	document.querySelector(".timebox").innerHTML = "GAME OVER !!!"
+       	console.log("game-over");
+       	setTimeout (function() {
+       	reset1();
+       },5000)
+       }
+  
+       }
+     
+
+
+function reset1()
 {
-	var score = 0;
+	document.body.innerHTML= "";	
+	board = cards.concat(cards);
+	score = 0;
 for(var i = 0; i < board.length * 2; i++)
 {
 var temp = 0;
@@ -17,8 +41,39 @@ var rand1 = Math.floor(Math.random() * board.length);
  board[rand] = board[rand1];
  board[rand1] = temp;
 }
+window.clearTimeout(timer);
+makeGrid(board);
+makeClickable();
+
+
+
 //console.log(board);
 };
+
+function reset2()
+{
+	board = [];
+	for(var j = 0; j<cards.length/2; j++)
+	{
+		board.push(cards[j]);
+	}
+	board = board.concat(board);
+	//console.log(cards);
+	score = 0;
+for(var i = 0; i < board.length * 2; i++)
+{
+var temp = 0;
+var rand = Math.floor(Math.random() * board.length);
+var rand1 = Math.floor(Math.random() * board.length);
+ temp = board[rand];
+ board[rand] = board[rand1];
+ board[rand1] = temp;
+}
+window.clearTimeout(timer);
+//console.log(board);
+};
+
+
 
 var clicked = 0;
 var prev = 0;
@@ -26,6 +81,7 @@ var current = 0;
 var pair = 0;
 
 var makeGrid = function(set) {
+
 var bod = document.querySelector("body");
 
 for (var i =0; i<set.length; i++)
@@ -47,6 +103,15 @@ scorebox.style.width = "10%";
 		scorebox.className = "scorebox";
 document.body.appendChild(scorebox);
 
+
+var timebox = document.createElement("box");
+timebox.style.width = "10%";
+		timebox.style.height = "60px";
+		timebox.style.border = "2px dotted black";
+		timebox.style.float = "left";
+		timebox.className = "timebox";
+document.body.appendChild(timebox);
+
 var reset = document.createElement("button");
 reset.style.width = "10%";
 		reset.style.height = "30px";
@@ -55,15 +120,38 @@ reset.style.width = "10%";
 		reset.className = "reset";
 		reset.innerHTML = "reset";
 document.body.appendChild(reset);
-reset.addEventListener("mousedown", function(){
 
-		
-			location.reload();
-		
+var difficulty = document.createElement("button");
+difficulty.style.width = "10%";
+		difficulty.style.height = "30px";
+		difficulty.style.border = "2px dotted black";
+		difficulty.style.float = "left";
+		difficulty.className = "easier";
+		difficulty.innerHTML = "easier";
+document.body.appendChild(difficulty);
+
+reset.addEventListener("mousedown", function(){
+			// location.reload();	
+			document.body.innerHTML= "";	
+	reset1();
+
+
+	})
+
+difficulty.addEventListener("mousedown", function(){
+			// location.reload();	
+			document.body.innerHTML= "";	
+	reset2();
+makeGrid(board);
+makeClickable();
+
 	})
 }
 
+
+
 var makeClickable = function() {
+	startTimer(time);
 var grid = document.querySelectorAll("div");
 	for(var i = 0; i < grid.length; i++)
 	{
@@ -101,10 +189,10 @@ var grid = document.querySelectorAll("div");
 			score += 1;
 
 			document.querySelector(".scorebox").innerHTML = "SCORE: " + score;
-			if(score === 10)
+			if(score === board.length/2)
 			{
 			document.querySelector(".scorebox").innerHTML = "Congrats you won!";
-
+				window.clearTimeout(timer);
 			}
 			console.log(score);
 			}, 500);
@@ -148,6 +236,6 @@ var grid = document.querySelectorAll("div");
 
 	}
 }
-reset();
-makeGrid(board);
-makeClickable();
+reset1();
+
+// startTimer(time);
