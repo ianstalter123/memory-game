@@ -74,6 +74,33 @@ window.clearTimeout(timer);
 //console.log(board);
 };
 
+function reset3()
+{
+	board = [];
+	for(var j = 0; j<cards.length; j++)
+	{
+		board.push(cards[j]);
+	}
+	for(var k = 0; k<3; k++)
+	{
+		board.push(cards[k]);
+	}
+	board = board.concat(board);
+	//console.log(cards);
+	score = 0;
+for(var i = 0; i < board.length * 2; i++)
+{
+var temp = 0;
+var rand = Math.floor(Math.random() * board.length);
+var rand1 = Math.floor(Math.random() * board.length);
+ temp = board[rand];
+ board[rand] = board[rand1];
+ board[rand1] = temp;
+}
+window.clearTimeout(timer);
+//console.log(board);
+};
+
 
 
 var clicked = 0;
@@ -131,6 +158,15 @@ difficulty.style.width = "10%";
 		difficulty.innerHTML = "easier";
 document.body.appendChild(difficulty);
 
+var difficulty2 = document.createElement("button");
+difficulty2.style.width = "10%";
+		difficulty2.style.height = "30px";
+		difficulty2.style.border = "2px dotted black";
+		difficulty2.style.float = "left";
+		difficulty2.className = "harder";
+		difficulty2.innerHTML = "harder";
+document.body.appendChild(difficulty2);
+
 reset.addEventListener("mousedown", function(){
 			 location.reload();	
 	// 		document.body.innerHTML= "";	
@@ -143,6 +179,15 @@ difficulty.addEventListener("mousedown", function(){
 			// location.reload();	
 			document.body.innerHTML= "";	
 	reset2();
+makeGrid(board);
+makeClickable();
+
+	})
+
+difficulty2.addEventListener("mousedown", function(){
+			// location.reload();	
+			document.body.innerHTML= "";	
+	reset3();
 makeGrid(board);
 makeClickable();
 
