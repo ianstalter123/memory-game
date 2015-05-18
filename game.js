@@ -25,6 +25,41 @@ var time = 50;
        }
   
        }
+
+
+  function peek1()
+  {
+
+
+  	var grid = document.querySelectorAll("div");
+	for(var i = 0; i < grid.length; i++)
+	{
+		
+		grid[i].style.backgroundSize = 'contain';
+
+		grid[i].style.backgroundRepeat = 'no-repeat';
+		grid[i].style.backgroundImage = 'url(images/' + grid[i].className + ')';
+	}
+
+	setTimeout (function() {
+
+		for(var i = 0; i < grid.length; i++)
+	{
+		
+	if(grid[i].id === 'done')
+	{
+		grid[i].style.backgroundImage = 'url(images/' + grid[i].className + ')';
+	}
+	else
+	{
+		grid[i].style.backgroundImage = '';
+	}
+	}
+	
+       	// reset1();
+       	
+       },5000)
+  };
      
 
 
@@ -167,6 +202,15 @@ difficulty2.style.width = "10%";
 		difficulty2.innerHTML = "harder";
 document.body.appendChild(difficulty2);
 
+var peek = document.createElement("button");
+peek.style.width = "10%";
+		peek.style.height = "30px";
+		peek.style.border = "2px dotted black";
+		peek.style.float = "left";
+		peek.className = "peek";
+		peek.innerHTML = "peek";
+document.body.appendChild(peek);
+
 reset.addEventListener("mousedown", function(){
 			 location.reload();	
 	// 		document.body.innerHTML= "";	
@@ -190,6 +234,12 @@ difficulty2.addEventListener("mousedown", function(){
 	reset3();
 makeGrid(board);
 makeClickable();
+
+	})
+
+peek.addEventListener("mousedown", function(){
+			// location.reload();	
+	peek1();
 
 	})
 }
