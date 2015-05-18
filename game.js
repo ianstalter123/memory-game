@@ -19,7 +19,8 @@ var time = 50;
        	document.querySelector(".timebox").innerHTML = "GAME OVER !!!"
        	console.log("game-over");
        	setTimeout (function() {
-       	reset1();
+       	// reset1();
+       	location.reload();
        },5000)
        }
   
