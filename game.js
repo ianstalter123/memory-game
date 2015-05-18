@@ -82,7 +82,7 @@ var pair = 0;
 
 var makeGrid = function(set) {
 
-var bod = document.querySelector("body");
+var bod = document.querySelector("inner");
 
 for (var i =0; i<set.length; i++)
 {	
