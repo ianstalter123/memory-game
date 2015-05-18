@@ -89,7 +89,7 @@ for (var i =0; i<set.length; i++)
 		var square = document.createElement("div");
 		square.style.width = "15%";
 		square.style.height = "120px";
-		square.style.border = "2px dotted white";
+		square.style.border = "2px dotted darkblue";
 		square.style.background = "green";
 		square.className = set[i];
 		square.style.float = "left";
@@ -131,9 +131,9 @@ difficulty.style.width = "10%";
 document.body.appendChild(difficulty);
 
 reset.addEventListener("mousedown", function(){
-			// location.reload();	
-			document.body.innerHTML= "";	
-	reset1();
+			 location.reload();	
+	// 		document.body.innerHTML= "";	
+	// reset1();
 
 
 	})
